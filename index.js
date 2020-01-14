@@ -4,6 +4,7 @@ const cors = require("cors");
 
 const { find, findById, insert, remove, update } = require("./data/db");
 const server = express();
+server.use(express.json());
 
 server.get("/", (req, res) => {
   res.send("Hello World");
@@ -58,6 +59,25 @@ server.get("/api/users/:id", (req, res) => {
       res
         .status(500)
         .json({ errorMessage: "The user information could not be retrieved." });
+    });
+});
+
+server.delete("/api/users/:id", (req, res) => {
+  const { id } = req.params;
+
+  remove(id)
+    .then(data => {
+      console.log(data);
+      if (data) {
+        res.status(202).json(`User with id ${data} got deleted`);
+      } else {
+        res.status(404).json({
+          errorMessage: `The user with the specified ID, ${id}, does not exist.`
+        });
+      }
+    })
+    .catch(error => {
+      res.status(500).json({ errorMessage: "The user could not be removed" });
     });
 });
 
