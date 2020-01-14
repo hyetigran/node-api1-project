@@ -4,6 +4,8 @@ const cors = require("cors");
 
 const { find, findById, insert, remove, update } = require("./data/db");
 const server = express();
+
+server.use(cors());
 server.use(express.json());
 
 server.get("/", (req, res) => {

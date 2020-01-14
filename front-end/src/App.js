@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+
+import UserList from "./components/userList";
+import UserForm from "./components/userForm";
 import "./App.css";
 
 function App() {
@@ -12,7 +15,7 @@ function App() {
 
   const getUsers = () => {
     axios
-      .get("/api/users")
+      .get("http://localhost:5000/api/users")
       .then(response => {
         console.log(response.data);
         setUsers(response.data);
@@ -33,7 +36,7 @@ function App() {
   const handleSubmit = e => {
     e.preventDefault();
     axios
-      .post("/api/users", user)
+      .post("http://localhost:5000/api/users", user)
       .then(response => {
         setUsers([...users, user]);
       })
@@ -41,7 +44,17 @@ function App() {
         console.log(error);
       });
   };
-  return <div className="App"></div>;
+  return (
+    <div className="App">
+      <nav>
+        <h1>Node Day 1 challenge</h1>
+      </nav>
+      <div className="container">
+        <UserForm />
+        <UserList />
+      </div>
+    </div>
+  );
 }
 
 export default App;
