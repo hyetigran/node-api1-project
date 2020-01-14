@@ -26,7 +26,9 @@ function App() {
 
   const updateUser = (id, user) => {};
 
-  const handleChange = e => {};
+  const handleChange = e => {
+    setUser({ ...user, [e.target.name]: e.target.value.toUpperCase() });
+  };
 
   const handleSubmit = e => {
     e.preventDefault();
