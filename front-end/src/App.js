@@ -7,7 +7,7 @@ import "./App.css";
 
 function App() {
   const [users, setUsers] = useState([]);
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState({ name: "", bio: "" });
 
   useEffect(() => {
     getUsers();
@@ -25,12 +25,23 @@ function App() {
       });
   };
 
-  const deleteUser = id => {};
-
+  const deleteUser = id => {
+    axios
+      .delete(`http://localhost:5000/api/users/${id}`)
+      .then(response => {
+        console.log(response);
+        setUsers(users.filter(user => user.id !== id));
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+  const selectUserUpdate = id => {};
   const updateUser = (id, user) => {};
 
   const handleChange = e => {
-    setUser({ ...user, [e.target.name]: e.target.value.toUpperCase() });
+    console.log(user);
+    setUser({ ...user, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = e => {
@@ -39,6 +50,7 @@ function App() {
       .post("http://localhost:5000/api/users", user)
       .then(response => {
         setUsers([...users, user]);
+        setUser({ name: "", bio: "" });
       })
       .catch(error => {
         console.log(error);
@@ -50,8 +62,16 @@ function App() {
         <h1>Node Day 1 challenge</h1>
       </nav>
       <div className="container">
-        <UserForm />
-        <UserList />
+        <UserForm
+          user={user}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+        />
+        <UserList
+          users={users}
+          selectUserUpdate={selectUserUpdate}
+          handleDelete={deleteUser}
+        />
       </div>
     </div>
   );

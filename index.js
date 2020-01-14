@@ -69,7 +69,7 @@ server.delete("/api/users/:id", (req, res) => {
 
   remove(id)
     .then(data => {
-      console.log(data);
+      //console.log(data);
       if (data) {
         res.status(202).json(`User with id ${data} got deleted`);
       } else {

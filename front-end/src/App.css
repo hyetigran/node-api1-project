@@ -7,3 +7,17 @@
 .container {
   display: flex;
 }
+
+.user-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-button-container {
+  display: flex;
+}
