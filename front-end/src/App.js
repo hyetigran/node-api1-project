@@ -7,13 +7,24 @@ function App() {
   const [user, setUser] = useState({});
 
   useEffect(() => {
-    getFriends();
-  });
-  const getFriends = () => {};
+    getUsers();
+  }, []);
 
-  const deleteFriend = id => {};
+  const getUsers = () => {
+    axios
+      .get("/api/users")
+      .then(response => {
+        console.log(response.data);
+        setUsers(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
 
-  const updateFriend = (id, user) => {};
+  const deleteUser = id => {};
+
+  const updateUser = (id, user) => {};
 
   const handleChange = e => {};
 
