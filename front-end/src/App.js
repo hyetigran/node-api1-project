@@ -3,7 +3,8 @@ import axios from "axios";
 import "./App.css";
 
 function App() {
-  const [friends, setFriends] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [user, setUser] = useState({});
 
   useEffect(() => {
     getFriends();
@@ -12,11 +13,21 @@ function App() {
 
   const deleteFriend = id => {};
 
-  const updateFriend = (id, updatedFriend) => {};
+  const updateFriend = (id, user) => {};
 
   const handleChange = e => {};
 
-  const handleSubmit = e => {};
+  const handleSubmit = e => {
+    e.preventDefault();
+    axios
+      .post("/api/users", user)
+      .then(response => {
+        setUsers([...users, user]);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
   return <div className="App"></div>;
 }
 
