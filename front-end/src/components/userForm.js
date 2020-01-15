@@ -43,6 +43,7 @@ const userForm = props => {
           <button
             type="submit"
             onClick={e => {
+              console.log("clicked 1");
               updateUser(e, user.id);
             }}
           >

@@ -46,8 +46,9 @@ function App() {
     axios
       .put(`http://localhost:5000/api/users/${id}`, user)
       .then(response => {
-        console.log(response);
-        setUsers([...users, response.data]);
+        const { id, name, bio, created_at, updated_at } = response.data;
+
+        setUsers(users.map(user => (user.id === id ? response.data : user)));
         setUser({ name: "", bio: "" });
         setEditing(false);
       })
@@ -74,6 +75,7 @@ function App() {
         console.log(error);
       });
   };
+
   return (
     <div className="App">
       <nav>
@@ -85,7 +87,7 @@ function App() {
           handleChange={handleChange}
           handleSubmit={handleSubmit}
           editing={editing}
-          updateuser={updateUser}
+          updateUser={updateUser}
         />
         <UserList
           users={users}
