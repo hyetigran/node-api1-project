@@ -6,6 +6,7 @@
 
 .container {
   display: flex;
+  height: 100vh;
 }
 
 .user-form {
@@ -13,15 +14,29 @@
   flex-direction: column;
 }
 
+.card-container {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
 .user-card {
   display: flex;
   flex-direction: column;
+  border: 1px solid grey;
+  border-radius: 0.5rem;
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+
+  min-width: 20%;
 }
 
 .card-button-container {
   display: flex;
+  justify-content: space-around;
 }
 
 .list-container {
   margin: 0 auto;
+  padding: 0 2rem;
+  width: 100%;
 }

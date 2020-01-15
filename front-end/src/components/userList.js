@@ -9,23 +9,24 @@ const userList = props => {
   return (
     <div className="list-container">
       <h3>User List</h3>
-
-      {users.length > 0 ? (
-        users.map(user => {
-          return (
-            <UserCard
-              key={user.id}
-              user={user}
-              selectUserUpdate={selectUserUpdate}
-              handleDelete={handleDelete}
-            />
-          );
-        })
-      ) : (
-        <div className="empty-list">
-          <h3>The User List is Empty</h3>
-        </div>
-      )}
+      <div className="card-container">
+        {users.length > 0 ? (
+          users.map(user => {
+            return (
+              <UserCard
+                key={user.id}
+                user={user}
+                selectUserUpdate={selectUserUpdate}
+                handleDelete={handleDelete}
+              />
+            );
+          })
+        ) : (
+          <div className="empty-list">
+            <h3>The User List is Empty</h3>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
