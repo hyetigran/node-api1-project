@@ -37,8 +37,24 @@ function App() {
         console.log(error);
       });
   };
-  const selectUserUpdate = id => {};
-  const updateUser = (id, user) => {};
+  const selectUserUpdate = id => {
+    setEditing(true);
+    setUser(...users.filter(user => user.id === id));
+  };
+  const updateUser = (e, id) => {
+    e.preventDefault();
+    axios
+      .put(`http://localhost:5000/api/users/${id}`, user)
+      .then(response => {
+        console.log(response);
+        setUsers([...users, response.data]);
+        setUser({ name: "", bio: "" });
+        setEditing(false);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
 
   const handleChange = e => {
     //console.log(user);

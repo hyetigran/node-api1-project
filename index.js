@@ -89,17 +89,21 @@ server.delete("/api/users/:id", (req, res) => {
 server.put("/api/users/:id", async (req, res) => {
   const { id } = req.params;
   const userUpdate = req.body;
-
+  console.log(userUpdate);
   try {
-    const updatedUser = await update(id, userUpdate);
-    if (updatedUser.name && updatedUser.bio) {
-      res.status(200).json(updatedUser);
+    console.log("happy path");
+    const updatedId = await update(id, userUpdate);
+    const user = await findById(id);
+    console.log("put", user);
+    if (user.name && user.bio) {
+      res.status(200).json(user);
     } else {
       res
         .status(400)
         .json({ errorMessage: "Please provide name and bio for the user." });
     }
   } catch (error) {
+    console.log("not happy path");
     res.status(500).json({
       errorMessage: "The user information could not be modified."
     });
