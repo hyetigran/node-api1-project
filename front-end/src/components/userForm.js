@@ -1,18 +1,12 @@
 import React from "react";
 import "../App.css";
 const userForm = props => {
-  const { handleSubmit, handleChange, user } = props;
+  const { handleSubmit, handleChange, user, editing, updateUser } = props;
   return (
     <div>
-      <h2>Add a User</h2>
-      <form
-        className="user-form"
-        onSubmit={e => {
-          handleSubmit(e);
-        }}
-      >
+      <h2>{!editing ? "Add a User" : "Edit User"}</h2>
+      <form className="user-form">
         <label>
-          {" "}
           Name:
           <input
             type="text"
@@ -25,7 +19,6 @@ const userForm = props => {
           />
         </label>
         <label>
-          {" "}
           Bio:
           <input
             type="text"
@@ -37,7 +30,25 @@ const userForm = props => {
             }}
           />
         </label>
-        <button>Add</button>
+        {!editing ? (
+          <button
+            type="submit"
+            onClick={e => {
+              handleSubmit(e);
+            }}
+          >
+            Add
+          </button>
+        ) : (
+          <button
+            type="submit"
+            onClick={e => {
+              updateUser(e);
+            }}
+          >
+            Edit
+          </button>
+        )}
       </form>
     </div>
   );

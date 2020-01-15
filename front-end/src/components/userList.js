@@ -1,13 +1,16 @@
 import React from "react";
 import UserCard from "./userCard";
 
+import "../App.css";
+
 const userList = props => {
   const { users, selectUserUpdate, handleDelete } = props;
+  console.log(users);
   return (
-    <div>
+    <div className="list-container">
       <h3>User List</h3>
 
-      {users &&
+      {users.length > 0 ? (
         users.map(user => {
           return (
             <UserCard
@@ -17,7 +20,12 @@ const userList = props => {
               handleDelete={handleDelete}
             />
           );
-        })}
+        })
+      ) : (
+        <div className="empty-list">
+          <h3>The User List is Empty</h3>
+        </div>
+      )}
     </div>
   );
 };

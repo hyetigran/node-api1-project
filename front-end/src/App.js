@@ -8,6 +8,7 @@ import "./App.css";
 function App() {
   const [users, setUsers] = useState([]);
   const [user, setUser] = useState({ name: "", bio: "" });
+  const [editing, setEditing] = useState(false);
 
   useEffect(() => {
     getUsers();
@@ -40,7 +41,7 @@ function App() {
   const updateUser = (id, user) => {};
 
   const handleChange = e => {
-    console.log(user);
+    //console.log(user);
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
@@ -49,7 +50,8 @@ function App() {
     axios
       .post("http://localhost:5000/api/users", user)
       .then(response => {
-        setUsers([...users, user]);
+        console.log(response);
+        setUsers([...users, response.data]);
         setUser({ name: "", bio: "" });
       })
       .catch(error => {
@@ -66,6 +68,8 @@ function App() {
           user={user}
           handleChange={handleChange}
           handleSubmit={handleSubmit}
+          editing={editing}
+          updateuser={updateUser}
         />
         <UserList
           users={users}

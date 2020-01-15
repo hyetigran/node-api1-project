@@ -21,7 +21,10 @@ server.post("/api/users", (req, res) => {
   } else {
     insert(newUser)
       .then(data => {
-        res.status(201).json(data);
+        //console.log("data", data);
+        findById(data.id).then(user => {
+          res.status(201).json(user);
+        });
       })
       .catch(error => {
         res.status(500).json({

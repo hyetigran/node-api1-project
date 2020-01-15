@@ -21,3 +21,7 @@
 .card-button-container {
   display: flex;
 }
+
+.list-container {
+  margin: 0 auto;
+}
